@@ -1,5 +1,6 @@
 
-
+const fs = require("fs");
+const { resolve } = require("path");
 
 let preview = document.getElementById("preview");
 let recording = document.getElementById("recording");
@@ -52,6 +53,30 @@ function start_record(stream, lengthInMS)
     return Promise.al([stopped, recorded]).then(() => recorded_data);
 }
 
+
+start_button.addEventListener
+(
+    "click", () => 
+        {
+            navigator.mediaDevices.getUserMedia
+            ({audio: true})
+            .then((stream) => 
+            {
+                preview.srcObject = stream;
+                download_button.href = stream;
+                preview.captureStream = preview.captureStream || preview.mozCaptureStream;
+
+                return new Promise((resolve) => (preview.onplaying = resolve));
+            })
+            .then(() => start_record(preview.captureStream(),)
+        }
+)
+
+
+
+
+
+
 navigator.mediaDevices
   .getUserMedia({ audio: true, video: true})
   .then((mediaStream) => 
@@ -65,4 +90,3 @@ navigator.mediaDevices
     }, 5000);
   });
 
-  
